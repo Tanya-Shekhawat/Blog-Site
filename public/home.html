@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Blogs</title>
+    <link rel="icon" type="image" href="img/logo3.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="/"><img src="img/logo3.png" class="logo" alt=""></a>
+        <ul class="links-container">
+            <li class="link-item"><a href="/" class="link">home</a></li>
+            <li class="link-item"><a href="/editor" class="link">Write Blog</a></li>
+        </ul>
+    </nav>
+
+    <header class="header">
+        <div class="content">
+            <h1 class="heading">
+                <span class="small">Welcome to the world of</span>
+                <span class="no-fill">blogs</span>
+            </h1>
+            <a href="/editor" class="btn">write a blog</a>
+        </div>
+    </header>
+    <!-- blog section -->
+    <section class="blogs-section">
+        <!-- <div class="blog-card">
+            <img src="img/header.png" class="blog-image" alt="">
+            <h1 class="blog-title">Lorem ipsum dolor sit amet consectetur.</h1>
+            <p class="blog-overview">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt incidunt fugiat quos porro repellat harum. Adipisci tempora corporis rem cum.</p>
+            <a href="/" class="btn dark">read</a>
+        </div> -->
+    </section>
+    <section class="blogs-sections">
+        <!-- <div class="blog-card">
+            <img src="img/header.png" class="blog-image" alt="">
+            <h1 class="blog-title">Lorem ipsum dolor sit amet consectetur.</h1>
+            <p class="blog-overview">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt incidunt fugiat quos porro repellat harum. Adipisci tempora corporis rem cum.</p>
+            <a href="/" class="btn dark">read</a>
+        </div> -->
+    </section>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-firestore.js"></script>
+
+    <script src="js/firebase.js"></script>
+    <script src="js/home.js"></script>
+    <script src="js/blog.js"></script>
+
+    <script>
+        const blogSections = document.querySelector('.blogs-sections');
+       fetch("https://newsapi.org/v2/top-headlines?country=us&apiKey=300be0372ce64ead840346911752051c")
+       .then(res => {
+        return res.json();
+        console.log(res);
+       })
+       .then((objdata) => {
+        console.log(objdata);
+        let data = objdata;
+        objdata.articles.map((values) => {
+              blogSections.innerHTML += `
+                <div class="blog-card">
+                    <img src="${values.urlToImage}" class="blog-image" alt="" onerror=this.src="img/img6.png">
+                    <h1 class="blog-title">${values.title}</h1>
+                    <p class="blog-overview">${values.publishedAt}</p>
+                    <a href="/${values.content}" class="btn dark">read</a>
+                </div>
+                 `;
+                //  document.querySelector('.blogs-sections');
+        });
+        
+    })
+       .catch(error => console.log(error));
+    </script>
+
+
+
+</body>
+<footer>
+    <div class="copyright">
+        <p>&copy 2022 - KN Blogs Pvt Ltd</p>
+</footer>
+
+</html>
